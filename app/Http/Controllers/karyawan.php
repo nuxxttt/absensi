@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\cabang;
-use App\gaji;
+
 use Illuminate\Http\Request;
 
-
-class absen extends Controller
+class karyawan extends Controller
 {
     /**
      * Display a listing of the resource.

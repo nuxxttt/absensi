@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->id();
+            // create table string (name , jam_masuk , jam_pulang)
+            $table->string('name');
+            $table->string('jam_masuk');
+            $table->string('jam_pulang');
+            $table->string('id_cabang');
             $table->timestamps();
         });
     }

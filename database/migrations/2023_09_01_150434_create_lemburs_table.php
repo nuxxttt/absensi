@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('lemburs', function (Blueprint $table) {
             $table->id();
+            $table->string("id_pegawai");
+            $table->string("absen_masuk")->nullable();
+            $table->string("absen_pulang")->nullable();
+            $table->string("status")->nullable();
+            $table->string("keterangan")->nullable();
             $table->timestamps();
         });
     }

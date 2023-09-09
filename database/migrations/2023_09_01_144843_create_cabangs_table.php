@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('cabangs', function (Blueprint $table) {
             $table->id();
+            $table->string("nama");
+            $table->string("lokasi");
+            $table->string("mesin_absen");
+            $table->string("keterangan")->nullable();
+            $table->string("status")->nullable();
             $table->timestamps();
         });
     }

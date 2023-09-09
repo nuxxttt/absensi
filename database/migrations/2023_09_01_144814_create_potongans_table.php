@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('potongans', function (Blueprint $table) {
             $table->id();
+            $table->string("nama");
+            $table->string("jumlah")->nullable();
+            $table->string("status")->nullable();
+            $table->string("keterangan")->nullable();
+            $table->string("id_pegawai")->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,21 @@
 Route::get('/', function () {
     return view('dashboard');
 });
+    Route::group(['prefix'=>'database'], function(){
+        Route::resource('cabang', cabang::class);
+        Route::resource('shift', shift::class);
+        Route::resource('karyawan', karyawan::class);
+    });
+    Route::group(['prefix'=>'absen'],function(){
+        Route::resource('absen', absen::class);
+        Route::get('/cabang/{id}','cabang@absen')->name('cabang.absensi');
+        Route::get('/lembur','absen@lembur')->name('absen.lembur');
+        Route::get('/add/{id}','absen@add')->name('absen.add');
+        Route::post('/add-store','absen@store');
+        Route::post('/add-excel','absen@excel')->name('absen.excel');
+    });
+    Route::resource('gaji', gaji::class);
+
 
 Route::group(['prefix' => 'email'], function(){
     Route::get('inbox', function () { return view('pages.email.inbox'); });

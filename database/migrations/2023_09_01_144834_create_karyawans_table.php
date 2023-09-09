@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('karyawans', function (Blueprint $table) {
             $table->id();
+            $table->string("nama");
+            $table->string("id_cabang");
+            $table->string("pangkat");
+            $table->string("keterangan")->nullable();
+            
             $table->timestamps();
         });
     }

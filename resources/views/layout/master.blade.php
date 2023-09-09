@@ -1,13 +1,5 @@
 <!DOCTYPE html>
-<!--
-Template Name: NobleUI - Laravel Admin Dashboard Template
-Author: NobleUI
-Website: https://www.nobleui.com
-Portfolio: https://themeforest.net/user/nobleui/portfolio
-Contact: nobleui123@gmail.com
-Purchase: https://1.envato.market/nobleui_laravel
-License: For each use you must have a valid license purchased only from above link in order to legally use the theme for your project.
--->
+
 <html>
 <head>
   <meta charset="UTF-8">
@@ -17,7 +9,7 @@ License: For each use you must have a valid license purchased only from above li
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
 
-  <title>NobleUI - Laravel Admin Dashboard Template</title>
+  <title>Absensi Tulunganggung</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,8 +35,9 @@ License: For each use you must have a valid license purchased only from above li
 
   @stack('style')
 </head>
-<body data-base-url="{{url('/')}}">
-
+<body data-base-url="{{url('/')}}" class="sidebar-dark">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  @include('sweetalert::alert')
   <script src="{{ asset('assets/js/spinner.js') }}"></script>
 
   <div class="main-wrapper" id="app">
@@ -53,7 +46,55 @@ License: For each use you must have a valid license purchased only from above li
       @include('layout.header')
       <div class="page-content">
         @yield('content')
+        @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Sukses',
+                text: '{{ session('success') }}'
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}'
+            });
+        </script>
+        
+    @endif
       </div>
+      <script>
+        // Tambahkan event listener untuk tombol atau tautan
+        document.addEventListener('DOMContentLoaded', function () {
+            var deleteButtons = document.getElementsByClassName('delete-button');
+      
+            Array.from(deleteButtons).forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var formId = this.getAttribute('data-form-delete');
+      
+                    Swal.fire({
+                        title: 'Anda yakin?',
+                        text: "Tindakan ini tidak dapat diurungkan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Mengirimkan request penghapusan
+                            document.getElementById('form-delete-' + formId).submit();
+                        }
+                    });
+                });
+            });
+        });
+      </script>
       @include('layout.footer')
     </div>
   </div>
