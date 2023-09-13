@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\KaryawanModel;
+Use App\GajiModel;
 
 class karyawan extends Controller
 {
@@ -13,7 +15,8 @@ class karyawan extends Controller
      */
     public function index()
     {
-        //
+        $data = KaryawanModel::all();
+        return view('pages.karyawan.index', compact('data'));
     }
 
     /**
@@ -23,7 +26,7 @@ class karyawan extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.karyawan.create');
     }
 
     /**
@@ -34,7 +37,27 @@ class karyawan extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datas = $request->all();
+        $data =[
+            "nama"=>$datas['nama'],
+            'id_cabang'=>$datas['cabang'],
+            'jabatan'=>$datas['jabatan'],
+            'gaji'=>$datas['gaji'],
+            'id_shift'=>$datas['shift'],
+            'id_absen' => $datas['id_absen']
+
+        ];
+        KaryawanModel::create($data);
+        $karyawan=KaryawanModel::where('nama',$datas['nama'])->where('id_cabang',$datas['cabang'])->first();
+        $gaji = [
+            'id_pegawai'=>$datas['karyawan'],
+            'jumlah'=>$datas['gaji'],
+            'status'=>"gaji_pokok",
+            'keterangan'=>'data_gaji'
+
+        ];
+        GajiModel::create($gaji);
+        return redirect()->route('karyawan.index')->with('success','Data Berhasil Ditambahkan');
     }
 
     /**
@@ -56,7 +79,8 @@ class karyawan extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = KaryawanModel::find($id);
+        return view('pages.karyawan.update',compact($data));
     }
 
     /**
@@ -68,7 +92,26 @@ class karyawan extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $datas = $request->all();
+        $data =[
+            "nama"=>$datas['nama'],
+            'id_cabang'=>$datas['cabang'],
+            'jabatan'=>$datas['jabatan'],
+            'gaji'=>$datas['gaji'],
+            'id_shift'=>"shift",
+            'id_absen' => 'id_absen'
+
+        ];
+        $gaji = [
+            'id_pegawai'=>$id,
+            'jumlah'=>$datas['gaji'],
+            'status'=>"gaji_pokok",
+            'keterangan'=>'data_gaji'
+
+        ];
+        GajiModel::where('id_pegawai',$id)->update($gaji);
+        KaryawanModel::find($id)->update($data);
+        return redirect()->route('karyawan.index')->with('success','Data Berhasil DiPerbarui');
     }
 
     /**

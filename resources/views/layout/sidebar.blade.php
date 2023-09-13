@@ -32,18 +32,18 @@
         <div class="collapse {{ show_class(['masterdata/*']) }}" id="masterdata">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{ url('/database/cabang') }}" class="nav-link {{ active_class(['masterdata/cabang']) }}">Cabang</a>
+              <a href="{{ url('/database/cabang') }}" class="nav-link {{ active_class(['database/cabang']) }}">Cabang</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/database/shift') }}" class="nav-link {{ active_class(['masterdata/shift']) }}">Shift</a>
+              <a href="{{ url('/database/shift') }}" class="nav-link {{ active_class(['database/shift']) }}">Shift</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/database/pegawai') }}" class="nav-link {{ active_class(['masterdata/pegawai']) }}">Karyawan</a>
+              <a href="{{ url('/database/karyawan') }}" class="nav-link {{ active_class(['database/pegawai']) }}">Karyawan</a>
             </li>
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['/']) }}">
+      <li class="nav-item {{ active_class(['/setting']) }}">
         <a href="{{ url('/setting') }}" class="nav-link">
           <i class="link-icon" data-feather="settings"></i>
           <span class="link-title">Setting</span>
@@ -66,7 +66,7 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['/']) }}">
+      <li class="nav-item {{ active_class(['/lembur']) }}">
         <a href="{{ url('/absen/lembur') }}" class="nav-link">
           <i class="link-icon" data-feather="moon"></i>
           <span class="link-title">Lembur</span>

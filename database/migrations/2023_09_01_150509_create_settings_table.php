@@ -15,7 +15,10 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            
+            // create tabel string (minimal_telat,minimal_pulang ,potongan_telat);
+            $table->string('minimal_telat');
+            $table->string('minimal_pulang');
+            $table->string('potongan_telat')->nullable();
             $table->timestamps();
         });
     }

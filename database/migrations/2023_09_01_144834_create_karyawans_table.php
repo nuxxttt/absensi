@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string("nama");
             $table->string("id_cabang");
-            $table->string("pangkat");
+            $table->string("jabatan");
+            $table->string("id_shift");
+            $table->string("id_absen");
             $table->string("keterangan")->nullable();
             
             $table->timestamps();

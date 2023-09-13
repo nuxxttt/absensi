@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ShiftModel;
 
 class shift extends Controller
 {
@@ -13,7 +14,9 @@ class shift extends Controller
      */
     public function index()
     {
-        //
+        $data = ShiftModel::all();
+        return view("pages.shift.index",compact("data"));
+        
     }
 
     /**
@@ -23,7 +26,7 @@ class shift extends Controller
      */
     public function create()
     {
-        //
+        return view("pages.shift.create");
     }
 
     /**
@@ -34,7 +37,22 @@ class shift extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datas = $request->all();
+        // falidasi required
+        $this->validate($request,[
+            "name" => "required",
+            "jam_masuk" => "required",
+            "jam_pulang" => "required",
+            "id_cabang" => "required",
+        ]);
+        $data =[
+            "name"=>$datas['name'],
+            'jam_masuk'=>$datas['jam_masuk'],
+            'jam_pulang'=>$datas['jam_pulang'],
+            'id_cabang'=>$datas['id_cabang'],
+        ];
+        ShiftModel::create($data);
+        return redirect()->route('shift.index')->with('success','Data Berhasil Ditambahkan');
     }
 
     /**
@@ -56,7 +74,8 @@ class shift extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = ShiftModel::find($id);
+        return view("pages.shift.update",compact("data"));
     }
 
     /**
@@ -68,7 +87,15 @@ class shift extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $datas = $request->all();
+        $data =[
+            "name"=>$datas['name'],
+            'jam_masuk'=>$datas['jam_masuk'],
+            'jam_pulang'=>$datas['jam_pulang'],
+            'id_cabang'=>$datas['id_cabang'],
+        ];
+        ShiftModel::find($id)->update($data);
+        return redirect()->route('shift.index')->with('success','Data Berhasil Diupdate');
     }
 
     /**
@@ -79,6 +106,7 @@ class shift extends Controller
      */
     public function destroy($id)
     {
-        //
+        ShiftModel::find($id)->delete();
+        return redirect()->route('shift.index')->with('success','Data Berhasil DiHapus');
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\cabang;
-use App\gaji;
+use App\CabangModel;
+use App\GajiModel;
+use App\AbsenModel;
 use Illuminate\Http\Request;
 
 
@@ -16,6 +17,16 @@ class absen extends Controller
     public function index()
     {
         //
+    }
+    public function excel(Request $request,$id){
+        $mesin_absen = CabangModel::find($id);
+        $mesin_absen = $mesin_absen->mesin_absen;
+        if($mesin_absen === "solution"){
+            
+        }
+        elseif($mesin_absen === "interactive"){
+
+        }
     }
 
     /**

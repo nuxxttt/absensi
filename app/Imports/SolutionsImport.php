@@ -4,9 +4,8 @@ namespace App\Imports;
 
 use App\AbsenModel;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class ImportCabang1 implements ToModel, WithHeadingRow
+class SolutionsImport implements ToModel
 {
     /**
     * @param array $row
@@ -15,7 +14,7 @@ class ImportCabang1 implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        return new absen([
+        return new AbsenModel([
             //
         ]);
     }
