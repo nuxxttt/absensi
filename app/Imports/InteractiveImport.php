@@ -7,10 +7,11 @@ use App\AbsenModel;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToCollection;
-use Maatwebsite\Excel\Concerns\WithMultipleSheet;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
 
-class InteractiveImport implements WithMultipleSheet
+
+class InteractiveImport implements WithMultipleSheets
 {
     /**
     * @param Collection $collection
@@ -18,7 +19,7 @@ class InteractiveImport implements WithMultipleSheet
     public function sheets(): array
     {
         return [
-            new AbsenModel,
+            "Exception Stat."=> new InteractivesImport()
         ];
     }
 }

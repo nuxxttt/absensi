@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\CabangModel;
 use App\GajiModel;
 use App\AbsenModel;
+use Excel;
+use App\Imports\InteractiveImport;
+use App\Imports\SolutionsImport;
 use Illuminate\Http\Request;
 
 
@@ -22,10 +25,22 @@ class absen extends Controller
         $mesin_absen = CabangModel::find($id);
         $mesin_absen = $mesin_absen->mesin_absen;
         if($mesin_absen === "solution"){
-            
+            try {
+                Excel::import(new SolutionsImport, request()->file('file'));
+                return redirect()->back()->with('success', 'Data Imported');
+            } catch (\Exception $e) {
+                // Handle the exception
+                return redirect()->back()->with('error', 'Error importing data: ' . $e->getMessage());
+            }
         }
         elseif($mesin_absen === "interactive"){
-
+            try {
+                Excel::import(new InteractiveImport, request()->file('file'));
+                return redirect()->back()->with('success', 'Data Imported');
+            } catch (\Exception $e) {
+                // Handle the exception
+                return redirect()->back()->with('error', 'Error importing data: ' . $e->getMessage());
+            }
         }
     }
 

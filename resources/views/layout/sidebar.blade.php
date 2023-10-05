@@ -66,11 +66,37 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['/lembur']) }}">
-        <a href="{{ url('/absen/lembur') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['lembur/*']) }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#lembur" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
           <i class="link-icon" data-feather="moon"></i>
           <span class="link-title">Lembur</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
+        <div class="collapse {{ show_class(['lembur/*']) }}" id="lembur">
+          <ul class="nav sub-menu">
+              @foreach ($data as $item)
+              <li class="nav-item">
+                <a href="{{ url("/absen/lembur/$item->id") }}" class="nav-link {{ active_class(["lembur/$item->id"]) }}">{{$item->nama}}</a>
+              </li>
+              @endforeach
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item {{ active_class(['penyesuaian/*']) }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#penyesuaian" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
+          <i class="link-icon" data-feather="check"></i>
+          <span class="link-title">Penyesuaian</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse {{ show_class(['penyesuaian/*']) }}" id="penyesuaian">
+          <ul class="nav sub-menu">
+              @foreach ($data as $item)
+              <li class="nav-item">
+                <a href="{{ url("/absen/penyesuaian/$item->id") }}" class="nav-link {{ active_class(["penyesuain/$item->id"]) }}">{{$item->nama}}</a>
+              </li>
+              @endforeach
+          </ul>
+        </div>
       </li>
       <li class="nav-item {{ active_class(['Gaji/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#Gaji" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">

@@ -22,10 +22,11 @@ Route::get('/', function () {
     Route::group(['prefix'=>'absen'],function(){
         Route::resource('absen', absen::class);
         Route::get('/cabang/{id}','cabang@absen')->name('cabang.absensi');
-        Route::get('/lembur','absen@lembur')->name('absen.lembur');
+        Route::get('/lembur/{id}','absen@lembur')->name('absen.lembur');
         Route::get('/add/{id}','absen@add')->name('absen.add');
         Route::post('/add-store','absen@store');
         Route::post('/add-excel/{id}','absen@excel')->name('absen.excel');
+        Route::get('/penyesuaian/{id}','absen@penyesuaian')->name('absen.penyesuaian');
     });
     Route::resource('gaji', gaji::class);
 

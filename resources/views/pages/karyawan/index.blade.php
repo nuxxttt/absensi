@@ -35,6 +35,8 @@
                 <th>Cabang</th>
                 <th>Jabatan</th>
                 <th>Gaji Pokok</th>
+                <th>Uang Makan</th>
+                <th>Uang Bensin</th>
                 <th>Shift</th>
                 <th>Action</th>
               </tr>
@@ -44,8 +46,12 @@
               <tr>
                   @php
                       $cabang = CabangModel::where('id',$item->id_cabang)->first();
-                      $gaji = GajiModel::where('id_pegawai',$item->id)->first();
+                      $gaji = GajiModel::where('id_pegawai',$item->id)->where('status','gaji_pokok')->first();
+                      $makan = GajiModel::where('id_pegawai',$item->id)->where('status','uang_makan')->first();
+                      $bensin = GajiModel::where('id_pegawai',$item->id)->where('status','uang_bensin')->first();
                       $gaji = "Rp " . number_format($gaji->jumlah,0,',','.');
+                      $makan = "Rp " . number_format($makan->jumlah,0,',','.');
+                      $bensin = "Rp " . number_format($bensin->jumlah,0,',','.');
                       $shift = ShiftModel::where('id',$item->id_shift)->first();
                   @endphp
                 <td>{{ $loop->index+1 }}</td>
@@ -53,6 +59,8 @@
                 <td> {{$cabang->nama}}</td>
                 <td> {{$item->jabatan}}</td>
                 <td>{{$gaji}}</td>
+                <td>{{$makan}}</td>
+                <td>{{$bensin}}</td>
                 <td>{{$shift->name}}</td>
                 <td>
                   <div class="text-end">

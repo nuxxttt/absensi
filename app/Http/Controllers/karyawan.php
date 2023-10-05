@@ -50,13 +50,26 @@ class karyawan extends Controller
         KaryawanModel::create($data);
         $karyawan=KaryawanModel::where('nama',$datas['nama'])->where('id_cabang',$datas['cabang'])->first();
         $gaji = [
-            'id_pegawai'=>$datas['karyawan'],
+            'id_pegawai'=>$karyawan->id,
             'jumlah'=>$datas['gaji'],
             'status'=>"gaji_pokok",
             'keterangan'=>'data_gaji'
-
+        ];
+        $makan = [
+            'id_pegawai'=>$karyawan->id,
+            'jumlah'=>$datas['uang_makan'],
+            'status'=>"uang_makan",
+            'keterangan'=>''
+        ];
+        $bensin = [
+            'id_pegawai'=>$karyawan->id,
+            'jumlah'=>$datas['uang_bensin'],
+            'status'=>"uang_bensin",
+            'keterangan'=>''
         ];
         GajiModel::create($gaji);
+        GajiModel::create($makan);
+        GajiModel::create($bensin);
         return redirect()->route('karyawan.index')->with('success','Data Berhasil Ditambahkan');
     }
 

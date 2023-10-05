@@ -41,8 +41,16 @@
                 <input type="number" name="id_absen" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
             </div>
             <div class="mb-3">
-                <label for="exampleInputUsername4" class="form-label">Gaji</label>
+                <label for="exampleInputUsername4" class="form-label">Gaji Per Jam </label>
                 <input type="number" name="gaji" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputUsername4" class="form-label">Uang Makan</label>
+                <input type="number" name="uang_makan" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputUsername4" class="form-label">Uang bensin</label>
+                <input type="number" name="uang_bensin" class="form-control" id="exampleInputUsername4" autocomplete="off" placeholder="">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlSelect1" class="form-label">Tugas Di Cabang</label>

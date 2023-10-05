@@ -14,6 +14,7 @@ class AbsenModel extends Model
         'absen_masuk',
         'absen_pulang',
         'status',
-        'keterangan' 
+        'keterangan',
+        'tanggal'
     ];
 }

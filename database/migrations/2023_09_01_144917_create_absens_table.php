@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("absen_masuk")->nullable();
             $table->string("absen_pulang")->nullable();
             $table->string("status")->nullable();
+            $table->string("tanggal")->nullable();
             $table->string("keterangan")->nullable();
             $table->timestamps();
         });
