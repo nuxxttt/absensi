@@ -5,7 +5,9 @@
 @endpush
 @php
     use App\CabangModel;
+    use App\AbsenModel;
     $datas= CabangModel::where('id',$data->id)->get();
+    $absen = AbsenModel::all();
 @endphp
 @section('content')
 <nav class="page-breadcrumb">
@@ -31,10 +33,11 @@
               <tr>
                 {{-- tabel head nama	kepalaCabang	telepon	alamat	category	keterangan --}}
                 <th>No</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Mesin Absen</th>
+                <th>Nama Pegawai</th>
+                <th>Absen Masuk</th>
+                <th>Absen Pulang</th>
                 <th>Keterangan</th>
+                <th>Tanggal</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -42,10 +45,11 @@
               @foreach ($datas as $item)
               <tr>
                 <td>{{ $loop->index+1 }}</td>
-                <td> {{$item->nama}}</td>
-                <td> {{$item->lokasi}}</td>
-                <td> {{$item->mesin_absen}}</td>
-                <td>{{$item->keterangan}}</td>
+                <td> {{$item->id_pegawai}}</td>
+                <td> {{$item->absen_masuk}}</td>
+                <td> {{$item->absen_pulang}}</td>
+                <td>{{$item->tanggal}}</td>
+                <td>{{$item->status}}</td>
                 <td>
                   <div class="text-end">
                     <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
