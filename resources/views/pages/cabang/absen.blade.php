@@ -42,7 +42,7 @@
               </tr>
             </thead>
             <tbody id="tb-category">
-              @foreach ($datas as $item)
+              @foreach ($absen as $item)
               <tr>
                 <td>{{ $loop->index+1 }}</td>
                 <td> {{$item->id_pegawai}}</td>
