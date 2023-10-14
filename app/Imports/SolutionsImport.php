@@ -25,7 +25,7 @@ class SolutionsImport implements ToCollection
             if ($item[2] <= 1){
                 $data = $item[1];
                 $data = strtotime($data);
-                if($absen_times !== false){
+                if($data !== false){
                     $absen_time =Carbon::createFromFormat('H:i:s', $item[1]);
                     $absen_tanggal = Carbon::createFromFormat('Y-m-d', $item[1]);
                     $check_id = AbsenModel::where('tanggal',$absen_tanggal)->where('id_pegawai',$item[0])->value('id');
