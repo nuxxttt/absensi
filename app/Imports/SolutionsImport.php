@@ -25,11 +25,9 @@ class SolutionsImport implements ToCollection
             if ($item[2] <= 1){
                 $data = $item[1];
                 $data = strtotime($data);
-                $absen_times = Carbon::createFromFormat('Y-m-d H:i:s', $data);
-                dd($absen_times);
                 if($absen_times !== false){
-                    $absen_time = date('H:i:s', $absen_times);
-                    $absen_tanggal = date('Y-m-d',$absen_times);
+                    $absen_time =Carbon::createFromFormat('H:i:s', $item[1]);
+                    $absen_tanggal = Carbon::createFromFormat('Y-m-d', $item[1]);
                     $check_id = AbsenModel::where('tanggal',$absen_tanggal)->where('id_pegawai',$item[0])->value('id');
                     if(!empty($check_id)){
                         $id_shift = KaryawanModel::where('id_absen',$item[0])->value('id_shift');
