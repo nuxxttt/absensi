@@ -24,6 +24,7 @@ class SolutionsImport implements ToCollection
             $absen = new AbsenModel;
             if ($item[2] <= 1){
                 $data = $item[1];
+                $data = strtotime($data);
                 $absen_times = Carbon::createFromTimestamp((int)($data - 25569) * 86400);
                 dd($absen_times);
                 if($absen_times !== false){
