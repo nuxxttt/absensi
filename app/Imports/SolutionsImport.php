@@ -5,6 +5,7 @@ use Illuminate\Support\Collection;
 use App\AbsenModel;
 use App\ShiftModel;
 use App\KaryawanModel;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
@@ -23,9 +24,9 @@ class SolutionsImport implements ToCollection
             $absen = new AbsenModel;
             if ($item[2] <= 1){
                 $data = $item[1];
-                $absen_times = strtotime($data);
-                $absen_times =  date('Y-m-d H:i:s', $absen_times);
-                dd($collection);
+                $carbonDate = Carbon::createFromTimestamp((int)($data - 25569) * 86400);
+                $absen_times =  $carbonDate->format('H:i:s');
+                dd($absen_times);
                 // if($absen_times !== false){
                 //     $absen_time = date('H:i:s', $absen_times);
                 //     $absen_tanggal = date('Y-m-d',$absen_times);
