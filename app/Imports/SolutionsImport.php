@@ -27,9 +27,8 @@ class SolutionsImport implements ToCollection
                 if($absen_times !== false){
                     $absen_time = date('H:i:s', $absen_times);
                     $absen_tanggal = date('Y-m-d',$absen_times);
-                    $check_id = AbsenModel::where('tanggal',$absen_tanggal)->where('id_pegawai',$item[0])->first();
-                    if(!empty($check_id->id_pegawai)){
-                        $absen = AbsenModel::find($check_id)->get();
+                    $check_id = AbsenModel::where('tanggal',$absen_tanggal)->where('id_pegawai',$item[0])->value('id');
+                    if(!empty($check_id)){
                         $id_shift = KaryawanModel::where('id_absen',$item[0])->value('id_shift');
                         $shift_pulang = ShiftModel::where('id',$id_shift)->value('jam_pulang');
                             if($absen_time > $shift_pulang){
@@ -41,6 +40,7 @@ class SolutionsImport implements ToCollection
                                     $absen->save();
                                 }
                             }
+                        $absen = AbsenModel::find($check_id);
                         $absen->absen_pulang = $absen_time;
                         $absen->save();
                     }
