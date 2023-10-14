@@ -10,11 +10,25 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 
 class SolutionsImport implements ToCollection
 {
+     // /**
+    // * @param array $row
+    // *
+    // * @return \Illuminate\Database\Eloquent\Model|null
+    // */
+    // public function model(array $row)
+    // {
+    //     // return new AbsenModel([
+    //     //     //
+    //     // ]);
+    // }
+     /**
+     * @param collection $collection
+     *
+     * 
+    */
     public function collection(Collection $collection)
     {
         foreach($collection as $item){
-            // data id 0
-            // data time 1
             $absen = new AbsenModel;
             if ($item[2] <= 1){
                 $data = $item[1];
