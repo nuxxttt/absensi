@@ -18,7 +18,6 @@ class SolutionsImport implements ToCollection
             $absen = new AbsenModel;
             if ($item[2] <= 1){
                 $data = $item[1];
-                $data = strtotime($data);
                 $carbonDate = Carbon::createFromTimestamp(($data - 25569) * 86400);
                     $absen_time = $carbonDate->format('H:i'); // Perbaikan: Menggunakan "i" untuk menampilkan menit
                     $absen_tanggal = $carbonDate->format('Y-m-d');
