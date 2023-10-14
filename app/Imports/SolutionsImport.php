@@ -34,15 +34,15 @@ class SolutionsImport implements ToCollection
                             if($absen_time > $shift_pulang){
                                 $status = AbsenModel::where('tanggal',$absen_tanggal)->where('id_pegawai',$item[0])->value('status');
                                 if($status == "tepat_waktu"){
-                                    $absen = AbsenModel::find($check_id);
-                                    $absen->absen_pulang = $absen_time;
-                                    $absen->status ='tidak_tepat_waktu';~
-                                    $absen->save();
+                                    AbsenModel::where('id',$check_id)->update([
+                                        'absen_pulang'=>$absen_time,
+                                        'status'=>'tidak_tepat_waktu'
+                                    ]);
                                 }
                             }
-                        $absen = AbsenModel::find($check_id);
-                        $absen->absen_pulang = $absen_time;
-                        $absen->save();
+                            AbsenModel::where('id',$check_id)->update([
+                                'absen_pulang'=>$absen_time,
+                            ]);
                     }
                     else{
                         $id_shift = KaryawanModel::where('id_absen',$item[0])->value('id_shift');
