@@ -23,10 +23,10 @@ class SolutionsImport implements ToCollection
             $absen = new AbsenModel;
             if ($item[2] <= 1){
                 $data = $item[1];
-                $absen_time = strtotime($data);
+                $absen_times = strtotime($data);
                 if($absen_time !== false){
-                    $absen_time = date('H:i:s', $absen_time);
-                    $absen_tanggal = date('Y-m-d',$absen_time);
+                    $absen_time = date('H:i:s', $absen_times);
+                    $absen_tanggal = date('Y-m-d',$absen_times);
                     $check_id = AbsenModel::where('tanggal',$absen_tanggal)->where('id_pegawai',$item[0])->value('id_pegawai');
                     if(!empty($check_id)){
                         $id_shift = KaryawanModel::where('id_absen',$item[0])->value('id_shift');
