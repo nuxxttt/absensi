@@ -25,7 +25,7 @@ class SolutionsImport implements ToCollection
                 $data = $item[1];
                 $absen_times = strtotime($data);
                 $absen_times =  date('Y-m-d H:i:s', $absen_times);
-                dd($absen_times);
+                dd($collection);
                 // if($absen_times !== false){
                 //     $absen_time = date('H:i:s', $absen_times);
                 //     $absen_tanggal = date('Y-m-d',$absen_times);
