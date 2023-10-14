@@ -27,8 +27,8 @@ class SolutionsImport implements ToCollection
                 $data = strtotime($data);
                 $carbonDate = Carbon::createFromTimestamp(($data - 25569) * 86400);
                 if($data !== false){
-                    $absen_time =$carbonDate->format('H:m')
-                    $absen_tanggal = $carbonDate->format('Y:m:d')
+                    $absen_time =$carbonDate->format('H:m');
+                    $absen_tanggal = $carbonDate->format('Y:m:d');
                     $check_id = AbsenModel::where('tanggal',$absen_tanggal)->where('id_pegawai',$item[0])->value('id');
                     if(!empty($check_id)){
                         $id_shift = KaryawanModel::where('id_absen',$item[0])->value('id_shift');
