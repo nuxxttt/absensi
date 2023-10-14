@@ -5,7 +5,6 @@ use Illuminate\Support\Collection;
 use App\AbsenModel;
 use App\ShiftModel;
 use App\KaryawanModel;
-use App\AbsenModel;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\ToCollection;
 
