@@ -35,7 +35,7 @@ class SolutionsImport implements ToCollection
                             if($status == "tepat_waktu"){
                                 $absen = AbsenModel::find($check_id);
                                 $absen->absen_pulang = $absen_time;
-                                $absen->status ='tidak_tepat_waktu';
+                                $absen->status ='tidak_tepat_waktu';~
                                 $absen->save();
                             }
                         }
@@ -51,14 +51,14 @@ class SolutionsImport implements ToCollection
                         $absen->tanggal = $absen_tanggal;
                         $absen->absen_masuk = $absen_time;
                         $absen->status ='tidak_tepat_waktu';
-                        $absen->save()
+                        $absen->save();
                     }
                     else{
                         $absen->id_pegawai= $item[0];
                         $absen->tanggal = $absen_tanggal;
                         $absen->absen_masuk = $absen_time;
                         $absen->status ='tepat_waktu';
-                        $absen->save()
+                        $absen->save();
                     }
                 }
             }
