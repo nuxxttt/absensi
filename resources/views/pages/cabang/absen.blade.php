@@ -47,11 +47,10 @@
               @foreach ($absen as $item)
               <tr>
                   @php
-                      $nama = KaryawanModel::where('id',$item->id_pegawai)->first();
-                      $nama = $nama->nama;
+                      $nama = KaryawanModel::where('id_absen',$item->id_pegawai)->value('nama');
                   @endphp
                 <td>{{ $loop->index+1 }}</td>
-                <td> {{$item->id_pegawai}}</td>
+                <td> {{$item->$nama}}</td>
                 <td> {{$item->absen_masuk}}</td>
                 <td> {{$item->absen_pulang}}</td>
                 <td>{{$item->tanggal}}</td>
