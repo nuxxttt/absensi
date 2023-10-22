@@ -57,7 +57,7 @@ class SolutionsImport implements ToCollection
                     else{
                         $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
                         $shift_masuk = ShiftModel::where('id', $id_shift)->value('jam_masuk');
-                        if($absen_time < $shift_masuk ){
+                        if($absen_time > $shift_masuk ){
                             $absen->id_pegawai = $item[0];
                             $absen->tanggal = $absen_tanggal;
                             $absen->absen_masuk = $absen_time;
