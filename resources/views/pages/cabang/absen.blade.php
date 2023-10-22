@@ -6,8 +6,10 @@
 @php
     use App\CabangModel;
     use App\AbsenModel;
+    use App\KaryawanModel;
     $datas= CabangModel::where('id',$data->id)->get();
     $absen = AbsenModel::all();
+
 @endphp
 @section('content')
 <nav class="page-breadcrumb">
@@ -44,6 +46,10 @@
             <tbody id="tb-category">
               @foreach ($absen as $item)
               <tr>
+                  @php
+                      $nama = KaryawanModel::where('id',$item->id_pegawai)->frist();
+                      $nama = $nama->nama;
+                  @endphp
                 <td>{{ $loop->index+1 }}</td>
                 <td> {{$item->id_pegawai}}</td>
                 <td> {{$item->absen_masuk}}</td>
