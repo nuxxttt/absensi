@@ -47,7 +47,7 @@
               @foreach ($absen as $item)
               <tr>
                   @php
-                      $nama = KaryawanModel::where('id',$item->id_pegawai)->frist();
+                      $nama = KaryawanModel::where('id',$item->id_pegawai)->first();
                       $nama = $nama->nama;
                   @endphp
                 <td>{{ $loop->index+1 }}</td>
