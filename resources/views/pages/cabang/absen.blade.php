@@ -50,7 +50,7 @@
                       $nama = KaryawanModel::where('id_absen',$item->id_pegawai)->value('nama');
                   @endphp
                 <td>{{ $loop->index+1 }}</td>
-                <td> {{$item->$nama}}</td>
+                <td> {{$nama}}</td>
                 <td> {{$item->absen_masuk}}</td>
                 <td> {{$item->absen_pulang}}</td>
                 <td>{{$item->tanggal}}</td>
