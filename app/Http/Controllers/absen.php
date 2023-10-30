@@ -21,6 +21,12 @@ class absen extends Controller
     {
         //
     }
+    public function lembur(){
+
+    }
+    public function penyesuaian(){
+        
+    }
     public function excel(Request $request,$id){
         $mesin_absen = CabangModel::find($id);
         $mesin_absen = $mesin_absen->mesin_absen;
