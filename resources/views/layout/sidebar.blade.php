@@ -66,7 +66,7 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['lembur/*']) }}">
+      <!-- <li class="nav-item {{ active_class(['lembur/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#lembur" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
           <i class="link-icon" data-feather="moon"></i>
           <span class="link-title">Lembur</span>
@@ -81,8 +81,20 @@
               @endforeach
           </ul>
         </div>
+      </li> -->
+      <li class="nav-item {{ active_class(['/absen/lembur']) }}">
+        <a href="{{ url('/absen/lembur') }}" class="nav-link">
+          <i class="link-icon" data-feather="moon"></i>
+          <span class="link-title">Lembur</span>
+        </a>
       </li>
-      <li class="nav-item {{ active_class(['penyesuaian/*']) }}">
+      <li class="nav-item {{ active_class(['/absen/penyusaian']) }}">
+        <a href="{{ url('/absen/penyesuaian') }}" class="nav-link">
+          <i class="link-icon" data-feather="check"></i>
+          <span class="link-title">Penyesuaian</span>
+        </a>
+      </li>
+      <!-- <li class="nav-item {{ active_class(['penyesuaian/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#penyesuaian" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
           <i class="link-icon" data-feather="check"></i>
           <span class="link-title">Penyesuaian</span>
@@ -97,8 +109,14 @@
               @endforeach
           </ul>
         </div>
+      </li> -->
+      <li class="nav-item {{ active_class(['/gaji']) }}">
+        <a href="{{ url('/gaji') }}" class="nav-link">
+          <i class="link-icon" data-feather="dollar-sign"></i>
+          <span class="link-title">Gaji</span>
+        </a>
       </li>
-      <li class="nav-item {{ active_class(['Gaji/*']) }}">
+      <!-- <li class="nav-item {{ active_class(['Gaji/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#Gaji" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
           <i class="link-icon" data-feather="dollar-sign"></i>
           <span class="link-title">Gaji</span>
@@ -113,6 +131,6 @@
               @endforeach
           </ul>
         </div>
-      </li>
+      </li> -->
   </div>
 </nav>
