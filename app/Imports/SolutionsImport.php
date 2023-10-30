@@ -34,11 +34,13 @@ class SolutionsImport implements ToCollection
                 $data = $item[1];
                 $carbonDate = Carbon::createFromTimestamp(($data - 25569) * 86400);
                     $absen_time = $carbonDate->format('H:i'); // Perbaikan: Menggunakan "i" untuk menampilkan menit
+                    $absen_over = $absen_time + 60*60;
                     $absen_tanggal = $carbonDate->format('Y-m-d');
                     $check_id = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('id');
                     if(!empty($check_id)){
                         $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
                         $shift_pulang = ShiftModel::where('id', $id_shift)->value('jam_pulang');
+                        $shift_pulang = strtotime($shift_pulang);
                         if($absen_time < $shift_pulang){
                             $status = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('status');
                             if($status == "tepat_waktu"){
@@ -57,6 +59,7 @@ class SolutionsImport implements ToCollection
                     else{
                         $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
                         $shift_masuk = ShiftModel::where('id', $id_shift)->value('jam_masuk');
+                        $shift_masuk = strtotime($shift_masuk);
                         if($absen_time > $shift_masuk ){
                             $absen->id_pegawai = $item[0];
                             $absen->tanggal = $absen_tanggal;
