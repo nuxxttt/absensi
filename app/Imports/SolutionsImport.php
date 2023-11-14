@@ -36,6 +36,7 @@ class SolutionsImport implements ToCollection
                     $absen_time = $carbonDate->format('H:i'); // Perbaikan: Menggunakan "i" untuk menampilkan menit
                     $absen_over = $absen_time + 60*60;
                     $absen_tanggal = $carbonDate->format('Y-m-d');
+                    $khusus =  KaryawanModel::where('id_absen',$item[0])->value('jabatan');
                     $check_id = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('id');
                     if(!empty($check_id)){
                         $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
@@ -50,6 +51,12 @@ class SolutionsImport implements ToCollection
                                 ]);
                             }
                         }
+                        elseif($khusus === "lapangan"){
+                            AbsenModel::where('id', $check_id)->update([
+                                'absen_pulang' => $absen_time,
+                                'status' => 'lapangan'
+                            ]);
+                        }
                         else{
                             AbsenModel::where('id', $check_id)->update([
                                 'absen_pulang' => $absen_time,
@@ -57,6 +64,7 @@ class SolutionsImport implements ToCollection
                         }
                     }
                     else{
+                        $khusus =  KaryawanModel::where('id_absen',$item[0])->value('jabatan');
                         $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
                         $shift_masuk = ShiftModel::where('id', $id_shift)->value('jam_masuk');
                         $shift_masuk = strtotime($shift_masuk);
@@ -65,6 +73,13 @@ class SolutionsImport implements ToCollection
                             $absen->tanggal = $absen_tanggal;
                             $absen->absen_masuk = $absen_time;
                             $absen->status = 'tidak_tepat_waktu';
+                            $absen->save();
+                        }
+                        elseif($khusus === "lapangan"){
+                            $absen->id_pegawai = $item[0];
+                            $absen->tanggal = $absen_tanggal;
+                            $absen->absen_masuk = $absen_time;
+                            $absen->status = 'lapangan'
                             $absen->save();
                         }
                         else{
