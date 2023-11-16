@@ -83,11 +83,11 @@ class SolutionsImport implements ToCollection
                             $absen->status = 'tidak_tepat_waktu';
                             $absen->save();
                         }
-                        elseif($khusus === "lapangan"){
+                        elseif($khusus == "lapangan"){
                             $absen->id_pegawai = $item[0];
                             $absen->tanggal = $absen_tanggal;
                             $absen->absen_masuk = $absen_time;
-                            $absen->status = 'lapangan'
+                            $absen->status = "lapangan"
                             $absen->save();
                         }
                         else{
