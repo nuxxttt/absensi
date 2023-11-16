@@ -33,8 +33,8 @@ class SolutionsImport implements ToCollection
             if ($item[2] <= 1){
                 $data = $item[1];
                 $carbonDate = Carbon::createFromTimestamp(($data - 25569) * 86400);
-                    $absen_time = $carbonDate->format('H:i'); // Perbaikan: Menggunakan "i" untuk menampilkan menit
-                    $absen_time = Carbon::parse($absen_time);
+                    $absen_times = $carbonDate->format('H:i'); // Perbaikan: Menggunakan "i" untuk menampilkan menit
+                    $absen_time = Carbon::parse($absen_times);
                     $absen_over = $carbonDate->copy()->addHour();
                     $absen_tanggal = $carbonDate->format('Y-m-d');
                     $khusus =  KaryawanModel::where('id_absen',$item[0])->value('jabatan');
@@ -49,28 +49,28 @@ class SolutionsImport implements ToCollection
                             if($absen_time > $shift_pulang){
                                 $status = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('status');
                                     AbsenModel::where('id', $check_id)->update([
-                                        'absen_pulang' => $absen_time,
+                                        'absen_pulang' => $absen_times,
                                         'keterangan' => 'lembur'
                                     ]);
                             }
                             elseif($absen_time < $shift_pulang){
                                 $status = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('status');
                                 if($status == "tepat_waktu"){
-                                    // AbsenModel::where('id', $check_id)->update([
-                                    //     'absen_pulang' => $absen_time,
-                                    //     'status' => 'tidak_tepat_waktu'
-                                    // ]);
+                                    AbsenModel::where('id', $check_id)->update([
+                                        'absen_pulang' => $absen_times,
+                                        'status' => 'tidak_tepat_waktu'
+                                    ]);
                                 }
                             }
                             elseif($khusus == "lapangan"){
                                 AbsenModel::where('id', $check_id)->update([
-                                    'absen_pulang' => $absen_time,
+                                    'absen_pulang' => $absen_times,
                                     'status' => 'lapangan'
                                 ]);
                             }
                             else{
                                 AbsenModel::where('id', $check_id)->update([
-                                    'absen_pulang' => $absen_time,
+                                    'absen_pulang' => $absen_times,
                                 ]);
                             }
                     }
@@ -83,21 +83,21 @@ class SolutionsImport implements ToCollection
                             if($absen_time > $shift_masuk ){
                                 $absen->id_pegawai = $item[0];
                                 $absen->tanggal = $absen_tanggal;
-                                $absen->absen_masuk = $absen_time;
+                                $absen->absen_masuk = $absen_times;
                                 $absen->status = 'tidak_tepat_waktu';
                                 $absen->save();
                             }
                             elseif($khusus === "lapangan"){
                                 $absen->id_pegawai = $item[0];
                                 $absen->tanggal = $absen_tanggal;
-                                $absen->absen_masuk = $absen_time;
+                                $absen->absen_masuk = $absen_times;
                                 $absen->status = "lapangan";
                                 $absen->save();
                             }
                             else{
                                 $absen->id_pegawai = $item[0];
                                 $absen->tanggal = $absen_tanggal;
-                                $absen->absen_masuk = $absen_time;
+                                $absen->absen_masuk = $absen_times;
                                 $absen->status = 'tepat_waktu';
                                 $absen->save();
                             }
