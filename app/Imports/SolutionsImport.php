@@ -38,11 +38,12 @@ class SolutionsImport implements ToCollection
                     $absen_tanggal = $carbonDate->format('Y-m-d');
                     $khusus =  KaryawanModel::where('id_absen',$item[0])->value('jabatan');
                     $check_id = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('id');
+                    $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
+                if(!empty($id_shift)){
                     if(!empty($check_id)){
-                        $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
                         $shift_pulang = ShiftModel::where('id', $id_shift)->value('jam_pulang');
                         $shift_pulang = strtotime($shift_pulang);
-                        if (!empty($id_shift)) {
+                        
                             if($absen_time > $shift_pulang){
                                 $status = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('status');
                                     AbsenModel::where('id', $check_id)->update([
@@ -70,7 +71,7 @@ class SolutionsImport implements ToCollection
                                     'absen_pulang' => $absen_time,
                                 ]);
                             }
-                        }
+                    }
                         else{
                             $khusus =  KaryawanModel::where('id_absen',$item[0])->value('jabatan');
                             $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
@@ -98,8 +99,7 @@ class SolutionsImport implements ToCollection
                                 $absen->save();
                             }
                         }
-                    }
-                
+                }
             }
         }   
     }
