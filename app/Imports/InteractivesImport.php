@@ -44,21 +44,33 @@ class InteractivesImport implements ToCollection
             $shift_pulang = ShiftModel::where('id',$id_shift)->value('jam_pulang');
             $shift_masuk = strtotime($shift_pulang);
             if($item[4] != null){
-                if($absen_masuk < $shift_masuk){
-                    if($absen_pulang > $shift_pulang){
-                        $absen->id_pegawai= $item[1];
-                        $absen->tanggal = $item[3];
-                        $absen->absen_masuk = $item[4];
-                        $absen->absen_pulang = $item[5];
-                        $absen->status ='tidak_tepat_waktu';
+                if($absen_masuk <= $shift_masuk){
+                    if($absen_pulang < $shift_pulang){
+                            $absen->id_pegawai= $item[1];
+                            $absen->tanggal = $item[3];
+                            $absen->absen_masuk = $item[4];
+                            $absen->absen_pulang = $item[5];
+                            $absen->status ='tidak_tepat_waktu';
+                        
                         $absen->save();
                     }
+
                     else{
-                    $absen->id_pegawai= $item[1];
-                    $absen->tanggal = $item[3];
-                    $absen->absen_masuk = $item[4];
-                    $absen->absen_pulang = $item[5];
-                    $absen->status ='tepat_waktu';
+                        if($absen_pulang > $shift_pulang){
+                            $absen->id_pegawai= $item[1];
+                            $absen->tanggal = $item[3];
+                            $absen->absen_masuk = $item[4];
+                            $absen->absen_pulang = $item[5];
+                            $absen->keterangan='lembur'
+                            $absen->status ='tepat_waktu';
+                        }
+                        else{
+                            $absen->id_pegawai= $item[1];
+                            $absen->tanggal = $item[3];
+                            $absen->absen_masuk = $item[4];
+                            $absen->absen_pulang = $item[5];
+                            $absen->status ='tepat_waktu';
+                        }
                     $absen->save();
                     }
                 }
@@ -76,6 +88,7 @@ class InteractivesImport implements ToCollection
                     $absen->absen_masuk = $item[4];
                     $absen->absen_pulang = $item[5];
                     $absen->status ='tidak_tepat_waktu';
+                    
                     $absen->save();
                 }
             }
