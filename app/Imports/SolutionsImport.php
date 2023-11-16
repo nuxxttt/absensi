@@ -58,12 +58,12 @@ class SolutionsImport implements ToCollection
                                 ]);
                             }
                         }
-                        elseif($khusus === "lapangan"){
-                            AbsenModel::where('id', $check_id)->update([
-                                'absen_pulang' => $absen_time,
-                                'status' => 'lapangan'
-                            ]);
-                        }
+                        // elseif($khusus == "lapangan"){
+                        //     AbsenModel::where('id', $check_id)->update([
+                        //         'absen_pulang' => $absen_time,
+                        //         'status' => 'lapangan'
+                        //     ]);
+                        // }
                         else{
                             AbsenModel::where('id', $check_id)->update([
                                 'absen_pulang' => $absen_time,
