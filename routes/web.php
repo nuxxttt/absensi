@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return redirect('/database/cabang');
 });
     Route::group(['prefix'=>'database'], function(){
         Route::resource('cabang', cabang::class);
