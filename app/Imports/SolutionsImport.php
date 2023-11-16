@@ -39,7 +39,7 @@ class SolutionsImport implements ToCollection
                     $khusus =  KaryawanModel::where('id_absen',$item[0])->value('jabatan');
                     $check_id = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('id');
                     $id_shift = KaryawanModel::where('id_absen', $item[0])->value('id_shift');
-                if(!empty($id_shift)){
+                if(!empty($khusus)){
                     if(!empty($check_id)){
                         $shift_pulang = ShiftModel::where('id', $id_shift)->value('jam_pulang');
                         $shift_pulang = strtotime($shift_pulang);
