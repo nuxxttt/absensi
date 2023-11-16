@@ -45,8 +45,8 @@ class SolutionsImport implements ToCollection
                         $shift_pulang = ShiftModel::where('id', $id_shift)->value('jam_pulang');
                         $shift_pulang = strtotime($shift_pulang);
                         $shift_pulang = Carbon::parse($shift_pulang);
-                        
-                            if($absen_time > $shift_pulang){
+                        $shift_lembur = Carbon::parse($shift_pulang)->addMinutes(5);
+                            if($absen_time > $shift_lembur){
                                 $status = AbsenModel::where('tanggal', $absen_tanggal)->where('id_pegawai', $item[0])->value('status');
                                     AbsenModel::where('id', $check_id)->update([
                                         'absen_pulang' => $absen_times,
