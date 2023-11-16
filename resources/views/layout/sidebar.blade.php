@@ -16,12 +16,12 @@
   <div class="sidebar-body">
     <ul class="nav">
       <li class="nav-item nav-category">Main</li>
-      <li class="nav-item {{ active_class(['/']) }}">
+      {{-- <li class="nav-item {{ active_class(['/']) }}">
         <a href="{{ url('/') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item nav-category">Data Master</li>
       <li class="nav-item {{ active_class(['masterdata/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#masterdata" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
