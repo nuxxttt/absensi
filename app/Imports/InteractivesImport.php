@@ -61,7 +61,7 @@ class InteractivesImport implements ToCollection
                             $absen->tanggal = $item[3];
                             $absen->absen_masuk = $item[4];
                             $absen->absen_pulang = $item[5];
-                            $absen->keterangan='lembur'
+                            $absen->keterangan='lembur';
                             $absen->status ='tepat_waktu';
                         }
                         else{
