@@ -39,6 +39,7 @@
                 <th>Absen Masuk</th>
                 <th>Absen Pulang</th>
                 <th>Keterangan</th>
+                <th>Status</th>
                 <th>Tanggal</th>
                 <th>Action</th>
               </tr>
@@ -53,12 +54,13 @@
                 <td> {{$nama}}</td>
                 <td> {{$item->absen_masuk}}</td>
                 <td> {{$item->absen_pulang}}</td>
-                <td>{{$item->tanggal}}</td>
                 <td>{{$item->status}}</td>
+                <td>{{$item->status}}</td>
+                <td>{{$item->tanggal}}</td>
                 <td>
                   <div class="text-end">
-                    <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a>
-                    <form id="form-delete-{{ $item->id }}" action="{{ route('cabang.destroy', $item->id) }}" method="POST" style="display: none;">
+                    {{-- <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a> --}}
+                    <form id="form-delete-{{ $item->id }}" action="{{ route('absen.destroy', $item->id) }}" method="POST" style="display: none;">
                       @csrf
                       @method('DELETE')
                   </form>

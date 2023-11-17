@@ -113,6 +113,7 @@ class absen extends Controller
      */
     public function destroy($id)
     {
-        //
+        AbsenModel::where('id',$id)->delete();
+        return redirect()->route('cabang.index')->with('success','Data Berhasil Dihapus');
     }
 }
