@@ -39,7 +39,7 @@ class LemburController extends Controller
         $data = [
             'id_pegawai'=>$request->id_pegawai,
             'jumlah'=>$request->jumlah,
-            'keterangan'=>'lembur'
+            'status'=>'lembur'
         ];
         GajiModel::create($data);
         AbsenModel::where('id',$request->id)->update([
