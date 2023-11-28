@@ -65,6 +65,7 @@
                     $pulang = Carbon::parse($item->absen_pulang);
                     $selisih = $shift_pulang->diffInMinutes($pulang);
                     $gaji_lembur = $gaji_menit * $selisih;
+                    $gaji_lembur =  ceil($gaji_lembur);
                   @endphp
                   <div class="text-end">
                     {{-- <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a> --}}
