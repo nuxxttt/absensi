@@ -7,13 +7,16 @@
     use App\CabangModel;
     use App\AbsenModel;
     use App\KaryawanModel;
+    use App\ShiftModel;
+    use App\GajiModel;
+    use Carbon\Carbon;
     $absen = AbsenModel::where('keterangan','lembur')->get();
 
 @endphp
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Absen</a></li>
+    <li class="breadcrumb-item"><a href="#">Absen Lembur</a></li>
   </ol>
 </nav>
 
@@ -51,7 +54,19 @@
                 <td>{{$item->keterangan}}</td>
                 <td>{{$item->tanggal}}</td>
                 <td>
+                  @php
+                    $id_pegawai = ,$item->id_pegawai;
+                    $gaji = GajiModel::where('id_pegawai',$id_pegawai)->
+                            where('status','gaji_pokok')->frist();
+                    $gaji_menit = $gaji->jumlah / 43200;
+                    $shift = KaryawanModel::where('id_absen',$item->id_pegawai)->value('id_shift');
+                    $shift_pulang = ShiftModel::where('id',$shift)->value('jam_pulang');
+                    $shift_pulang = Carbon::parse($shift_pulang);
+                    $pulang = Carbon::parse($item->absen_pulang);
+                    $selisih = $shift_pulang->diffInMinutes($pulang);
+                  @endphp
                   <div class="text-end">
+                    {{$selisih}}
                     {{-- <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a> --}}
                     <form id="form-approve-{{ $item->id }}" action="{{ route('lembur.store', $item->id) }}" method="POST" style="display: none;">
                       @csrf
