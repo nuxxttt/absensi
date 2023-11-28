@@ -21,6 +21,7 @@ Route::get('/', function () {
     });
     Route::group(['prefix'=>'absen'],function(){
         Route::resource('absen', absen::class);
+        Route::resource('lembur', LemburController::class);
         Route::get('/cabang/{id}','cabang@absen')->name('cabang.absensi');
         Route::get('/lembur','absen@lembur')->name('absen.lembur');
         Route::get('/add/{id}','absen@add')->name('absen.add');
