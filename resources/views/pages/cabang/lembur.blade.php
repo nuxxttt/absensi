@@ -57,7 +57,7 @@
                   @php
                     $id_pegawai =$item->id_pegawai;
                     $gaji = GajiModel::where('id_pegawai',$id_pegawai)->
-                            where('status','gaji_pokok')->frist();
+                            where('status','gaji_pokok')->first();
                     $gaji_menit = $gaji->jumlah / 43200;
                     $shift = KaryawanModel::where('id_absen',$item->id_pegawai)->value('id_shift');
                     $shift_pulang = ShiftModel::where('id',$shift)->value('jam_pulang');
