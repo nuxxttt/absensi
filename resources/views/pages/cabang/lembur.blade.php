@@ -55,7 +55,7 @@
                 <td>{{$item->tanggal}}</td>
                 <td>
                   @php
-                    $id_pegawai = ,$item->id_pegawai;
+                    $id_pegawai =$item->id_pegawai;
                     $gaji = GajiModel::where('id_pegawai',$id_pegawai)->
                             where('status','gaji_pokok')->frist();
                     $gaji_menit = $gaji->jumlah / 43200;
