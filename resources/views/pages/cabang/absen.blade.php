@@ -55,7 +55,7 @@
                 <td> {{$item->absen_masuk}}</td>
                 <td> {{$item->absen_pulang}}</td>
                 <td>{{$item->status}}</td>
-                <td>{{$item->status}}</td>
+                <td>{{$item->keterangan}}</td>
                 <td>{{$item->tanggal}}</td>
                 <td>
                   <div class="text-end">

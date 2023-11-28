@@ -7,7 +7,7 @@
     use App\CabangModel;
     use App\AbsenModel;
     use App\KaryawanModel;
-    $absen = AbsenModel::all();
+    $absen = AbsenModel::where('keterangan','lembur')->get();
 
 @endphp
 @section('content')
@@ -34,7 +34,6 @@
                 <th>Absen Masuk</th>
                 <th>Absen Pulang</th>
                 <th>Keterangan</th>
-                <th>Status</th>
                 <th>Tanggal</th>
                 <th>Action</th>
               </tr>
@@ -49,8 +48,7 @@
                 <td> {{$nama}}</td>
                 <td> {{$item->absen_masuk}}</td>
                 <td> {{$item->absen_pulang}}</td>
-                <td>{{$item->status}}</td>
-                <td>{{$item->status}}</td>
+                <td>{{$item->keterangan}}</td>
                 <td>{{$item->tanggal}}</td>
                 <td>
                   <div class="text-end">
