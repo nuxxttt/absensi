@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\GajiModel;
+use App\AbsenModel;
 
 class LemburController extends Controller
 {
@@ -79,6 +81,8 @@ class LemburController extends Controller
      */
     public function destroy($id)
     {
-        //
+        AbsenModel::where('id_pegawai',$id)->update([
+            'keterangan'=>'',
+        ]);
     }
 }
