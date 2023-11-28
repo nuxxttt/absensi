@@ -81,8 +81,9 @@ class LemburController extends Controller
      */
     public function destroy($id)
     {
-        AbsenModel::where('id_pegawai',$id)->update([
+        AbsenModel::where('id',$id)->update([
             'keterangan'=>'',
         ]);
+        return redirect()->route('absen.lembur')->with('success','Data Berhasil Diperbarui');
     }
 }
