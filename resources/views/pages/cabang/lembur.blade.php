@@ -7,7 +7,6 @@
     use App\CabangModel;
     use App\AbsenModel;
     use App\KaryawanModel;
-    $datas= CabangModel::where('id',$data->id)->get();
     $absen = AbsenModel::all();
 
 @endphp
