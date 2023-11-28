@@ -1,5 +1,8 @@
     @extends('layout.master')
-
+@php
+    use App\KaryawanModel;
+    $data = KaryawanModel::find($id);
+@endphp
     @section('content')
     <nav class="page-breadcrumb">
         <ol class="breadcrumb">

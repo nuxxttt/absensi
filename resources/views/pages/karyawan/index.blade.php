@@ -7,6 +7,7 @@
       use App\CabangModel;
       use App\ShiftModel;
       use App\GajiModel;
+      use App\PotonganModel;
   @endphp
 @section('content')
 <nav class="page-breadcrumb">
@@ -37,6 +38,7 @@
                 <th>Gaji Pokok</th>
                 <th>Uang Makan</th>
                 <th>Uang Bensin</th>
+                <th>Terlambat</th>
                 <th>Shift</th>
                 <th>Action</th>
               </tr>
@@ -46,12 +48,14 @@
               <tr>
                   @php
                       $cabang = CabangModel::where('id',$item->id_cabang)->first();
+                      $potongan = PotonganModel::('id_pegawai',$item->id)->where('status','terlambat')->first();
                       $gaji = GajiModel::where('id_pegawai',$item->id)->where('status','gaji_pokok')->first();
                       $makan = GajiModel::where('id_pegawai',$item->id)->where('status','uang_makan')->first();
                       $bensin = GajiModel::where('id_pegawai',$item->id)->where('status','uang_bensin')->first();
                       $gaji = "Rp " . number_format($gaji->jumlah,0,',','.');
                       $makan = "Rp " . number_format($makan->jumlah,0,',','.');
                       $bensin = "Rp " . number_format($bensin->jumlah,0,',','.');
+                      $potongan =$potongan ."%"
                       $shift = ShiftModel::where('id',$item->id_shift)->first();
                   @endphp
                 <td>{{ $loop->index+1 }}</td>
@@ -61,6 +65,7 @@
                 <td>{{$gaji}}</td>
                 <td>{{$makan}}</td>
                 <td>{{$bensin}}</td>
+                <td>{{$potongan}}</td>
                 <td>{{$shift->name}}</td>
                 <td>
                   <div class="text-end">

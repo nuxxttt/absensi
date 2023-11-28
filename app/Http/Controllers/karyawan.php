@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\KaryawanModel;
 Use App\GajiModel;
+use App\PotonganModel;
 
 class karyawan extends Controller
 {
@@ -67,9 +68,17 @@ class karyawan extends Controller
             'status'=>"uang_bensin",
             'keterangan'=>''
         ];
+        $terlambat = [
+            'nama'=>'terlambat',
+            'id_pegawai'=>$karyawan->id,
+            'jumlah'=>$datas['terlambat'],
+            'status'=>"terlambat",
+            'keterangan'=>'' 
+        ];
         GajiModel::create($gaji);
         GajiModel::create($makan);
         GajiModel::create($bensin);
+        PotonganModel::create($terlambat);
         return redirect()->route('karyawan.index')->with('success','Data Berhasil Ditambahkan');
     }
 
@@ -92,8 +101,7 @@ class karyawan extends Controller
      */
     public function edit($id)
     {
-        $data = KaryawanModel::find($id);
-        return view('pages.karyawan.update',compact($data));
+        return view('pages.karyawan.update',compact($id));
     }
 
     /**
@@ -122,7 +130,29 @@ class karyawan extends Controller
             'keterangan'=>'data_gaji'
 
         ];
+        $makan = [
+            'id_pegawai'=>$karyawan->id,
+            'jumlah'=>$datas['uang_makan'],
+            'status'=>"uang_makan",
+            'keterangan'=>''
+        ];
+        $bensin = [
+            'id_pegawai'=>$karyawan->id,
+            'jumlah'=>$datas['uang_bensin'],
+            'status'=>"uang_bensin",
+            'keterangan'=>''
+        ];
+        $terlambat = [
+            'nama'=>'terlambat',
+            'id_pegawai'=>$karyawan->id,
+            'jumlah'=>$datas['terlambat'],
+            'status'=>"terlambat",
+            'keterangan'=>'' 
+        ];
         GajiModel::where('id_pegawai',$id)->update($gaji);
+        GajiModel::where('id_pegawai',$id)->update($makan);
+        GajiModel::where('id_pegawai',$id)->update($bensin);
+        PotonganModel::where('id_pegawai',$id)->update($terlambat);
         KaryawanModel::find($id)->update($data);
         return redirect()->route('karyawan.index')->with('success','Data Berhasil DiPerbarui');
     }
