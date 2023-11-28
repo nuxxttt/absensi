@@ -20,11 +20,7 @@
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
-        <div class="card-header">
-            <h4 class="card-title">Data Absen</h4>
-            <a href="{{ url("/absen/add/$data->id") }}" class="btn btn-primary btn-sm">Tambah Data</a>
-            <button id="showUploadModal"  class="btn btn-success btn-sm">Tambah Excel</button>
-        </div>
+
       <div class="card-body">
         {{-- <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p> --}}
         
@@ -59,12 +55,16 @@
                 <td>
                   <div class="text-end">
                     {{-- <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a> --}}
-                    <form id="form-delete-{{ $item->id }}" action="{{ route('absen.destroy', $item->id) }}" method="POST" style="display: none;">
+                    <form id="form-approve-{{ $item->id }}" action="{{ route('lembur.store', $item->id) }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+                    <form id="form-delete-{{ $item->id }}" action="{{ route('lembur.destroy', $item->id) }}" method="POST" style="display: none;">
                       @csrf
                       @method('DELETE')
                   </form>
-                  <button type="submit" class="btn btn-danger btn-sm delete-button" data-form-delete="{{ $item->id }}">Delete</button>
-                  </div>
+                  <button type="submit" class="btn btn-success btn-sm approve-button" data-form-approve="{{ $item->id }}">Lembur</button>
+                  <button type="submit" class="btn btn-danger btn-sm delete-button" data-form-delete="{{ $item->id }}">Tidak Lembur</button>  
+                </div>
               </tr>
           @endforeach
               <!-- Modal -->
