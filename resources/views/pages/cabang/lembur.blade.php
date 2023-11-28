@@ -68,25 +68,6 @@
               </tr>
           @endforeach
               <!-- Modal -->
-<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-      <div class="modal-content">
-          <form action="{{ url("/absen/add-excel/$data->id") }}" method="POST" enctype="multipart/form-data">
-              @csrf
-              <div class="modal-header">
-                  <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
-              </div>
-              <div class="modal-body">
-                  <input type="file" name="file">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Upload</button>
-              </div>
-          </form>
-      </div>
-  </div>
-</div>
 
             </tbody>
           </table>
