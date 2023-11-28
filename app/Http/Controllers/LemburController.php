@@ -36,7 +36,16 @@ class LemburController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = [
+            'id_pegawai'=>$request->id_pegawai,
+            'jumlah'=>$request->jumlah,
+            'keterangan'=>'lembur'
+        ];
+        GajiModel::create($data);
+        AbsenModel::where('id',$request->id)->update([
+            'keterangan'=>'lembur_approve',
+        ]);
+        return redirect()->route('absen.lembur')->with('success','Data Berhasil Diperbarui');
     }
 
     /**

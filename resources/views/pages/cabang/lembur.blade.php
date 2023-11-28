@@ -64,12 +64,15 @@
                     $shift_pulang = Carbon::parse($shift_pulang);
                     $pulang = Carbon::parse($item->absen_pulang);
                     $selisih = $shift_pulang->diffInMinutes($pulang);
+                    $gaji_lembur = $gaji_menit * $selisih;
                   @endphp
                   <div class="text-end">
-                    {{$selisih}}
                     {{-- <a href="/database/cabang/{{$item->id}}/edit" class="btn btn-primary btn-sm">Edit</a> --}}
                     <form id="form-approve-{{ $item->id }}" action="{{ route('lembur.store', $item->id) }}" method="POST" style="display: none;">
                       @csrf
+                      <input type="hidden" name="jumlah" value="{{$gaji_lembur}}">
+                      <input type="hidden" name="id_pegawai" value="{{$id_pegawai}}">
+                      <input type="hidden" name="id" value="{{$item->id}}">
                   </form>
                     <form id="form-delete-{{ $item->id }}" action="{{ route('lembur.destroy', $item->id) }}" method="POST" style="display: none;">
                       @csrf
