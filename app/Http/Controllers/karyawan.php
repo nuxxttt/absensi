@@ -101,7 +101,7 @@ class karyawan extends Controller
      */
     public function edit($id)
     {
-        return view('pages.karyawan.update',compact($id));
+        return view('pages.karyawan.update',['id'=>$id]);
     }
 
     /**
@@ -119,8 +119,8 @@ class karyawan extends Controller
             'id_cabang'=>$datas['cabang'],
             'jabatan'=>$datas['jabatan'],
             'gaji'=>$datas['gaji'],
-            'id_shift'=>"shift",
-            'id_absen' => 'id_absen'
+            'id_shift'=>$datas['shift'],
+            'id_absen' => $datas['id_absen']
 
         ];
         $gaji = [
@@ -131,28 +131,28 @@ class karyawan extends Controller
 
         ];
         $makan = [
-            'id_pegawai'=>$karyawan->id,
+            'id_pegawai'=>$id,
             'jumlah'=>$datas['uang_makan'],
             'status'=>"uang_makan",
             'keterangan'=>''
         ];
         $bensin = [
-            'id_pegawai'=>$karyawan->id,
+            'id_pegawai'=>$id,
             'jumlah'=>$datas['uang_bensin'],
             'status'=>"uang_bensin",
             'keterangan'=>''
         ];
         $terlambat = [
             'nama'=>'terlambat',
-            'id_pegawai'=>$karyawan->id,
+            'id_pegawai'=>$id,
             'jumlah'=>$datas['terlambat'],
             'status'=>"terlambat",
             'keterangan'=>'' 
         ];
-        GajiModel::where('id_pegawai',$id)->update($gaji);
-        GajiModel::where('id_pegawai',$id)->update($makan);
-        GajiModel::where('id_pegawai',$id)->update($bensin);
-        PotonganModel::where('id_pegawai',$id)->update($terlambat);
+        GajiModel::where('id_pegawai',$id)->where('status','gaji_pokok')->update($gaji);
+        GajiModel::where('id_pegawai',$id)->where('status','uang_makan')->update($makan);
+        GajiModel::where('id_pegawai',$id)->where('status','uang_bensin')->update($bensin);
+        PotonganModel::where('id_pegawai',$id)->where('status','terlambat')->update($terlambat);
         KaryawanModel::find($id)->update($data);
         return redirect()->route('karyawan.index')->with('success','Data Berhasil DiPerbarui');
     }
@@ -165,6 +165,9 @@ class karyawan extends Controller
      */
     public function destroy($id)
     {
-        //
+        $gaji =GajiModel::where('id_pegawai',$id)->delete();
+        $potongan = PotonganModel::where('id_pegawai',$id)->delete();
+        KaryawanModel::find($id)->delete();
+        return redirect()->route('karyawan.index')->with('success','Data Berhasil DiHapus');
     }
 }
