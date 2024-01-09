@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/penyesuaian','absen@penyesuaian')->name('absen.penyesuaian');
     });
     Route::resource('gaji', gaji::class);
+    Route::get('/penggajian/{id}','gaji@gaji')->name('gaji.gaji');
+
 
 
 // Route::group(['prefix' => 'email'], function(){

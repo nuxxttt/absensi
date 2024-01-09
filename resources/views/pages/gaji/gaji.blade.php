@@ -14,35 +14,37 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title">Data Shift</h4>
-            <a href="{{ url('/database/gaji/create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
+            <h4 class="card-title text-center mt-2">Data Penggajian</h4>
         </div>
       <div class="card-body">
         {{-- <p class="text-muted mb-3">Read the <a href="https://datatables.net/" target="_blank"> Official DataTables Documentation </a>for a full list of instructions and other options.</p> --}}
-
+        @php
+        use Carbon\Carbon;
+    @endphp
         <div class="table-responsive">
+                          <td> {{$item}}</td>
+
           <table id="dataTableExample" class="table">
             <thead>
-              <tr>
-                {{-- tabel head nama	kepalaCabang	telepon	alamat	category	keterangan --}}
-                <th>No</th>
-                <th>Nama</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody id="tb-category">
-              @foreach ($data as $item)
-              <tr>
-                <td>{{ $loop->index+1 }}</td>
-                <td> {{$item->nama}}</td>
-                <td>
-                  <div class="text-end">
-                    <a href="/gaji/{{$item->id_absen}}" class="btn btn-primary btn-sm">View</a>
-                  </div>
-              </tr>
-          @endforeach
-
-            </tbody>
+                <tr>
+                  <th>No</th>
+                  <th>Tanggal</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="tb-category">
+                @foreach ($absen as $item)
+                  <tr>
+                    <td>{{ $loop->index+1 }}</td>
+                    <td>{{ Carbon::parse($item->tanggal)->format('Y-m') }}</td>
+                    <td>
+                      <div class="text-end">
+                        <a href="#" class="btn btn-primary btn-sm">View</a>
+                      </div>
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
           </table>
         </div>
       </div>
