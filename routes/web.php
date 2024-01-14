@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::resource('gaji', gaji::class);
     Route::get('/penggajian/{id}','gaji@gaji')->name('gaji.gaji');
+    Route::get('/gaji/ajax/{id}', [App\Controllers\gaji::class, 'ajaxGaji']);
+
 
 
 

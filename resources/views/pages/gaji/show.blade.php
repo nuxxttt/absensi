@@ -38,7 +38,7 @@
                   <td>{{ Carbon::parse($item->tanggal)->formatLocalized('%B %Y') }}</td>
                   <td>
                     <div class="text-end">
-                      <a href="{{ url('/penggajian/'. $idd . "?mo=" . Carbon::parse($item->tanggal)->format('Y-m')) }}" class="btn btn-primary btn-sm">View</a>
+                      <a href="{{ url('/penggajian/'. $iddd->id . "?mo=" . Carbon::parse($item->tanggal)->format('Y-m')) }}&idd={{$idd}}&status=tepat_waktu" class="btn btn-primary btn-sm">View</a>
                     </div>
                   </td>
                 </tr>
