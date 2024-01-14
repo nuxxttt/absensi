@@ -32,17 +32,31 @@
               </tr>
             </thead>
             <tbody id="tb-category">
-              @foreach ($data as $item)
-                <tr>
-                  <td>{{ $loop->index+1 }}</td>
-                  <td>{{ Carbon::parse($item->tanggal)->formatLocalized('%B %Y') }}</td>
-                  <td>
-                    <div class="text-end">
-                      <a href="{{ url('/penggajian/'. $iddd->id . "?mo=" . Carbon::parse($item->tanggal)->format('Y-m')) }}&idd={{$idd}}&status=tepat_waktu" class="btn btn-primary btn-sm">View</a>
-                    </div>
-                  </td>
-                </tr>
-              @endforeach
+                @php
+                $uniqueDates = [];
+            @endphp
+
+            @foreach ($data as $item)
+                @php
+                    $formattedDate = Carbon::parse($item->tanggal)->formatLocalized('%B %Y');
+                @endphp
+
+                @if (!in_array($formattedDate, $uniqueDates))
+                    <tr>
+                        <td>{{ $loop->index + 1 }}</td>
+                        <td>{{ $formattedDate }}</td>
+                        <td>
+                            <div class="text-end">
+                                <a href="{{ url('/penggajian/'. $iddd->id . "?mo=" . Carbon::parse($item->tanggal)->format('Y-m')) }}&idd={{$idd}}&status=tepat_waktu" class="btn btn-primary btn-sm">View</a>
+                            </div>
+                        </td>
+                    </tr>
+                    @php
+                        $uniqueDates[] = $formattedDate;
+                    @endphp
+                @endif
+            @endforeach
+
             </tbody>
           </table>
         </div>

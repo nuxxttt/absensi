@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\gaji;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
     Route::group(['prefix'=>'database'], function(){
         Route::resource('cabang', cabang::class);
         Route::resource('shift', shift::class);
@@ -34,7 +36,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::resource('gaji', gaji::class);
     Route::get('/penggajian/{id}','gaji@gaji')->name('gaji.gaji');
-    Route::get('/gaji/ajax/{id}', [App\Controllers\gaji::class, 'ajaxGaji']);
+    Route::get('/gaji/ajax/{id}', [gaji::class, 'ajaxGaji']);
 
 
 
